@@ -1,13 +1,12 @@
 const nodemailer = require("nodemailer");
 
-
 const transporter = nodemailer.createTransport({
     host: "sandbox.smtp.mailtrap.io",
-    port: 25,
-    secure: false, // Use true for port 465, false for port 587
+    port: 2525,
+    secure: false,
     auth: {
-        user: "afb860a426d68e",
-        pass: "d3964b7baf52ff",
+        user: "fd6121e7586b23",
+        pass: "91fde680732029",
     },
 });
 
@@ -17,8 +16,23 @@ module.exports = {
             from: 'admin@heha.com',
             to: to,
             subject: "Reset Password email",
-            text: "click vao day de reset password", // Plain-text version of the message
-            html: "click vao <a href=" + url + ">day</a> de reset password", // HTML version of the message
+            text: "click vao day de reset password",
+            html: "click vao <a href=" + url + ">day</a> de reset password",
+        });
+    },
+
+    sendMailPassword: async function (to, password) {
+        await transporter.sendMail({
+            from: 'admin@heha.com',
+            to: to,
+            subject: "Thong tin tai khoan cua ban",
+            text: `Mat khau cua ban la: ${password}`,
+            html: `
+                <h2>Chao mung ban den voi he thong!</h2>
+                <p>Tai khoan cua ban da duoc tao thanh cong.</p>
+                <p>Mat khau: <strong>${password}</strong></p>
+                <p>Vui long doi mat khau sau khi dang nhap.</p>
+            `,
         });
     }
 }

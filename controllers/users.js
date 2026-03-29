@@ -14,7 +14,7 @@ module.exports = {
             status: status
 
         });
-        await newItem.save({session});
+        await newItem.save(session ? { session } : {});
         return newItem;
     },
     FindByID: async function (id) {
